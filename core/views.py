@@ -21,6 +21,14 @@ class QuestionListView(ListView):
   model = Question
   template_name = "question/question_list.html"
 
+class AnswerDeleteView(DeleteView):
+  model = Answer
+  pk_url_kwarg = 'answer_pk'
+  template_name = 'answer/answer_confirm_delete.html'
+
+  def get_success_url(self):
+    return self.object.question.get_absolute_url()
+
 class AnswerCreateView(CreateView):
   model = Answer
   template_name = "answer/answer_form.html"
