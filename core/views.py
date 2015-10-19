@@ -54,3 +54,12 @@ class QuestionDeleteView(DeleteView):
   model = Question
   template_name = 'question/question_confirm_delete.html'
   success_url = reverse_lazy('question_list')
+
+class AnswerUpdateView(UpdateView):
+  model = Answer
+  pk_url_kwarg = 'answer_pk'
+  template_name = 'answer/answer_form.html'
+  fields = ['text']
+
+  def get_success_url(self):
+    return self.object.question.get_absolute_url()
